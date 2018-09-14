@@ -91,8 +91,6 @@ router.delete("/:comment_id", middleware.checkCommentOwnership, function(req, re
     });
 });
 
-
-
 //middleware moved to middleware/index.js
 
 module.exports = router;
