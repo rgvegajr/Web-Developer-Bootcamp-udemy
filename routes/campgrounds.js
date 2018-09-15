@@ -2,6 +2,16 @@ var express = require("express");
 var router  = express.Router();
 var Campground = require("../models/campground");
 var middleware = require("../middleware");
+var NodeGeocoder = require('node-geocoder');
+ 
+var options = {
+  provider: 'google',
+  httpAdapter: 'https',
+  apiKey: process.env.GEOCODER_API_KEY,
+  formatter: null
+};
+ 
+var geocoder = NodeGeocoder(options);
 
 //INDEX - show all campgrounds
 //campgrounds - name, image
@@ -113,15 +123,5 @@ router.delete("/:id", middleware.checkCampgroundOwnership, function(req, res){
 });
 
 //middleware moved to middleware/index.js
-var NodeGeocoder = require('node-geocoder');
- 
-var options = {
-  provider: 'google',
-  httpAdapter: 'https',
-  apiKey: process.env.GEOCODER_API_KEY,
-  formatter: null
-};
- 
-var geocoder = NodeGeocoder(options);
 
 module.exports = router;
