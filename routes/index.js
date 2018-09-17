@@ -20,13 +20,11 @@ router.get("/register", function(req, res){
 
 //handle user signup
 router.post("/register", function(req, res){
-//    req.body.username
-//    req.body.password
     var newUser = new User({username: req.body.username});
     User.register(newUser, req.body.password, function(err, user){
         if(err){
-            req.flash("error", err.message);
-            return res.render("register");
+//            req.flash("error", err.message);
+            return res.render("register", {error: err.message});
         }
         //log user in and redirect to secret page
         passport.authenticate("local")(req, res, function(){
